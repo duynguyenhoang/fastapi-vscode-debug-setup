@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  fastapi-vscode-debug-setup:
+    image: fastapi-vscode-debug-setup
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      - APP_MESSAGE=Hello world
+    ports:
+      - 8000:8000

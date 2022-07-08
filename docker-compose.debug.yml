@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  fastapi-vscode-debug-setup:
+    image: fastapi-vscode-debug-setup
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./hello_world:/code/hello_world
+    command: ["sh", "-c", "pip install debugpy -t /tmp && python /tmp/debugpy --wait-for-client --listen 0.0.0.0:5678 -m uvicorn hello_world.main:app --host 0.0.0.0 --port 8000 --reload"]
+    environment:
+      - APP_MESSAGE=Hello debugger
+    ports:
+      - 8000:8000
+      - 5678:5678
